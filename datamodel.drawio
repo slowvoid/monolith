@@ -123,6 +123,19 @@
         <mxCell id="_4GRNn-h4iKFCdvPG7Q--3" value="Category" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
           <mxGeometry x="330" y="90" width="60" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="_4GRNn-h4iKFCdvPG7Q--39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" edge="1" parent="1" source="_4GRNn-h4iKFCdvPG7Q--4" target="_4GRNn-h4iKFCdvPG7Q--1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_4GRNn-h4iKFCdvPG7Q--40" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="_4GRNn-h4iKFCdvPG7Q--39">
+          <mxGeometry x="-0.8688" relative="1" as="geometry">
+            <mxPoint x="-1" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_4GRNn-h4iKFCdvPG7Q--41" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="_4GRNn-h4iKFCdvPG7Q--39">
+          <mxGeometry x="0.8704" relative="1" as="geometry">
+            <mxPoint x="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="_4GRNn-h4iKFCdvPG7Q--4" value="Review" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
           <mxGeometry x="210" y="-30" width="60" height="60" as="geometry" />
         </mxCell>
