@@ -1,0 +1,8 @@
+# Files related to tools
+*.bkp
+
+# Folders related to tools
+.vscode
+
+# Env
+.env
