@@ -1,31 +1,45 @@
 import { Injectable } from "@slowvoid.dev/di";
-import { Controller, Delete, Get, Post, Put } from "@slowvoid.dev/express";
+import { Body, Controller, Delete, Get, Params, Post, Put } from "@slowvoid.dev/express";
+import { type UpdateCategoryDto, type CreateCategoryDto } from "./dto/category.dto";
+import { categoryService } from "../services/category.service";
 
 @Controller("/category")
 @Injectable()
 export class CategoryController {
   @Get("/all")
   async all() {
-    return [];
+    return await categoryService.getAll();
   }
 
   @Post("/create")
-  async create() {
-    return null;
+  async create(
+    @Body() data: CreateCategoryDto
+  ) {
+    return await categoryService.create({ ...data });
   }
 
   @Put("/:id/update")
-  async update() {
-    return null;
+  async update(
+    @Body() data: UpdateCategoryDto,
+    @Params("id") id: string
+  ) {
+    return await categoryService.update(id, data);
   }
 
   @Delete("/:id/delete")
-  async delete() {
-    return null;
+  async delete(
+    @Params("id") id: string
+  ) {
+    await categoryService.delete(id);
+    return {
+      message: "Deleted" 
+    };
   }
 
   @Get("/:id")
-  async getCategory() {
-    return null;
+  async getCategory(
+    @Params("id") id: string
+  ) {
+    return await categoryService.get(id);
   }
 }
