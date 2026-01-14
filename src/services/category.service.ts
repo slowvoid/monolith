@@ -8,7 +8,7 @@ class CategoryService {
   constructor() {
     this.prisma = GetPrismaClient();
   }
-  
+
   async create(data: CategoryCreateInput): Promise<Category> {
     return await this.prisma.category.create({
       data: data
@@ -26,8 +26,8 @@ class CategoryService {
     });
   }
 
-  async delete(id: string): Promise<void> {
-    await this.prisma.category.update({
+  async delete(id: string): Promise<Category> {
+    return await this.prisma.category.update({
       where: {
         id: id
       },

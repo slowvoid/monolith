@@ -1,5 +1,4 @@
 import { Order, PrismaClient } from "../../prisma/generated/client";
-import { OrderCreateInput } from "../../prisma/generated/models";
 import { GetPrismaClient, OmitIdFromModel } from "../lib/prisma";
 
 class OrderService {
@@ -8,41 +7,63 @@ class OrderService {
     this.prisma = GetPrismaClient();
   }
 
-  async create(data: OrderCreateInput): Promise<Order> {
-      return await this.prisma.order.create({
-        data: data
-      });
-    }
-  
-    async update(id: string, data: OmitIdFromModel<Order>): Promise<Order> {
-      return await this.prisma.order.update({
-        where: {
-          id: id
-        },
-        data: {
-          ...data
+  async getAll(): Promise<Order[]> {
+    return await this.prisma.order.findMany();
+  }
+
+  async create(inUserId: string, inAddressId: string): Promise<Order> {
+    return await this.prisma.order.create({
+      data: {
+        userId: inUserId,
+        addressId: inAddressId
+      }
+    });
+  }
+
+  async update(id: string, data: OmitIdFromModel<Order>): Promise<Order> {
+    return await this.prisma.order.update({
+      where: {
+        id: id
+      },
+      data: {
+        ...data
+      }
+    });
+  }
+
+  async delete(id: string): Promise<Order> {
+    return await this.prisma.order.update({
+      where: {
+        id: id
+      },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+  }
+
+  async get(id: string): Promise<Order> {
+    return await this.prisma.order.findUniqueOrThrow({
+      where: {
+        id: id
+      }
+    });
+  }
+
+  async addProduct(inOrderId: string, inProductId: string): Promise<Order> {
+    return await this.prisma.order.update({
+      data: {
+        items: {
+          create: {
+            productId: inProductId
+          }
         }
-      });
-    }
-  
-    async delete(id: string): Promise<void> {
-      await this.prisma.order.update({
-        where: {
-          id: id
-        },
-        data: {
-          deletedAt: new Date()
-        }
-      });
-    }
-  
-    async get(id: string): Promise<Order> {
-      return await this.prisma.order.findUniqueOrThrow({
-        where: {
-          id: id
-        }
-      });
-    }
+      },
+      where: {
+        id: inOrderId
+      }
+    });
+  }
 }
 
 export const orderService = new OrderService();

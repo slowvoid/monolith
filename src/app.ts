@@ -11,6 +11,7 @@ import { ShoppingCartController } from "./controllers/shoppingcart.controller";
 
 const app = express();
 
+app.use(express.json());
 app.use(httpLogger);
 
 attachControllers(app, [

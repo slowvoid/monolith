@@ -30,10 +30,7 @@ export class CategoryController {
   async delete(
     @Params("id") id: string
   ) {
-    await categoryService.delete(id);
-    return {
-      message: "Deleted" 
-    };
+    return await categoryService.delete(id);
   }
 
   @Get("/:id")

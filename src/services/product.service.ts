@@ -9,40 +9,44 @@ class ProductService {
   }
 
   async create(data: ProductCreateInput): Promise<Product> {
-      return await this.prisma.product.create({
-        data: data
-      });
-    }
-  
-    async update(id: string, data: OmitIdFromModel<Product>): Promise<Product> {
-      return await this.prisma.product.update({
-        where: {
-          id: id
-        },
-        data: {
-          ...data
-        }
-      });
-    }
-  
-    async delete(id: string): Promise<void> {
-      await this.prisma.product.update({
-        where: {
-          id: id
-        },
-        data: {
-          deletedAt: new Date()
-        }
-      });
-    }
-  
-    async get(id: string): Promise<Product> {
-      return await this.prisma.product.findUniqueOrThrow({
-        where: {
-          id: id
-        }
-      });
-    }
+    return await this.prisma.product.create({
+      data: data
+    });
+  }
+
+  async update(id: string, data: OmitIdFromModel<Product>): Promise<Product> {
+    return await this.prisma.product.update({
+      where: {
+        id: id
+      },
+      data: {
+        ...data
+      }
+    });
+  }
+
+  async delete(id: string): Promise<Product> {
+    return await this.prisma.product.update({
+      where: {
+        id: id
+      },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+  }
+
+  async get(id: string): Promise<Product> {
+    return await this.prisma.product.findUniqueOrThrow({
+      where: {
+        id: id
+      }
+    });
+  }
+
+  async getAll(): Promise<Product[]> {
+    return await this.prisma.product.findMany();
+  }
 }
 
 export const productService = new ProductService();

@@ -1,31 +1,42 @@
 import { Injectable } from "@slowvoid.dev/di";
-import { Controller, Delete, Get, Post, Put } from "@slowvoid.dev/express";
+import { Body, Controller, Delete, Get, Params, Post, Put } from "@slowvoid.dev/express";
+import { shoppingCartService } from "../services/shoppingcart.service";
+import { CreateShoppingCartDto, UpdateShoppingCartDto } from "./dto/shoppingcart.dto";
 
 @Controller("/shopping-cart")
 @Injectable()
 export class ShoppingCartController {
   @Get("/all")
   async all() {
-    return [];
+    return await shoppingCartService.getAll();
   }
 
   @Post("/create")
-  async create() {
-    return null;
+  async create(
+    @Body() data: CreateShoppingCartDto
+  ) {
+    return await shoppingCartService.create(data.userId);
   }
 
   @Put("/:id/update")
-  async update() {
-    return null;
+  async update(
+    @Params("id") shoppingCartId: string,
+    @Body() data: UpdateShoppingCartDto
+  ) {
+    return await shoppingCartService.update(shoppingCartId, data);
   }
 
   @Delete("/:id/delete")
-  async delete() {
-    return null;
+  async delete(
+    @Params("id") shoppingCartId: string
+  ) {
+    return await shoppingCartService.delete(shoppingCartId);
   }
 
   @Get("/:id")
-  async getCart() {
-    return null;
+  async getCart(
+    @Params("id") shoppingCartId: string
+  ) {
+    return await shoppingCartService.get(shoppingCartId);
   }
 }
