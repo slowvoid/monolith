@@ -32,6 +32,13 @@ export class UserController {
   ) {
     return await userService.delete(userId);
   }
+  
+  @Get("/:id/orders")
+  async getUserOrders(
+    @Params("id") userId: string
+  ) {
+    return await userService.getOrdersByUserId(userId);
+  }
 
   @Get("/:id")
   async getUser(

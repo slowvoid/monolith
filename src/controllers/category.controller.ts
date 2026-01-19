@@ -33,6 +33,13 @@ export class CategoryController {
     return await categoryService.delete(id);
   }
 
+  @Get("/:id/products")
+  async getCategoryProducts(
+    @Params("id") id: string
+  ) {
+    return await categoryService.getProductsByCategoryId(id);
+  }
+
   @Get("/:id")
   async getCategory(
     @Params("id") id: string

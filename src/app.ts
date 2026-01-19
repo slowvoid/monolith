@@ -8,10 +8,12 @@ import { OrderController } from "./controllers/order.controller";
 import { ProductController } from "./controllers/product.controller";
 import { ReviewController } from "./controllers/review.controller";
 import { ShoppingCartController } from "./controllers/shoppingcart.controller";
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
+app.use(cors())
 app.use(httpLogger);
 
 attachControllers(app, [

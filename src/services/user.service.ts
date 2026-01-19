@@ -47,6 +47,17 @@ class UserService {
       }
     });
   }
+
+  async getOrdersByUserId(inUserId: string) {
+    return await this.prisma.user.findFirst({
+      where: {
+        id: inUserId
+      },
+      include: {
+        orders: true
+      }
+    });
+  }
 }
 
 export const userService = new UserService();

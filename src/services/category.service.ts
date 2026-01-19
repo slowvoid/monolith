@@ -48,6 +48,17 @@ class CategoryService {
   async getAll(): Promise<Category[]> {
     return await this.prisma.category.findMany();
   }
+
+  async getProductsByCategoryId(inCategoryId: string) {
+    return await this.prisma.category.findFirst({
+      where: {
+        id: inCategoryId
+      },
+      include: {
+        products: true
+      }
+    });
+  }
 }
 
 export const categoryService = new CategoryService();
